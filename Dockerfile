@@ -1,6 +1,9 @@
+ARG CMATRIX_VERSION="master"
+
 FROM alpine:edge as builder
 
-ENV CMATRIX_VERSION master
+ARG CMATRIX_VERSION
+ENV CMATRIX_VERSION "${CMATRIX_VERSION}"
 
 RUN apk upgrade && apk add --no-cache \
     ncurses-dev \
@@ -19,6 +22,8 @@ RUN apk upgrade && apk add --no-cache \
 
 FROM scratch
 
+ARG CMATRIX_VERSION
+
 COPY --from=builder /lib/ld-musl-x86_64.so.1 /lib/ld-musl-x86_64.so.1
 COPY --from=builder /usr/lib/libncursesw.so.6 /usr/lib/libncursesw.so.6
 COPY --from=builder /etc/terminfo /etc/terminfo
@@ -29,3 +34,10 @@ COPY --from=builder /etc/passwd /etc/passwd
 USER cmatrix
 
 ENTRYPOINT ["/usr/local/bin/cmatrix"]
+
+LABEL org.opencontainers.image.title="cmatrix" \
+    org.opencontainers.image.description="cmatrix in Docker" \  
+    org.opencontainers.image.url="https://github.com/westonsteimel/docker-cmatrix" \ 
+    org.opencontainers.image.source="https://github.com/westonsteimel/docker-cmatrix" \
+    org.opencontainers.image.version="${CMATRIX_VERSION}"
+
