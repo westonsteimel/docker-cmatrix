@@ -39,5 +39,7 @@ LABEL org.opencontainers.image.title="cmatrix" \
     org.opencontainers.image.description="cmatrix in Docker" \  
     org.opencontainers.image.url="https://github.com/westonsteimel/docker-cmatrix" \ 
     org.opencontainers.image.source="https://github.com/westonsteimel/docker-cmatrix" \
-    org.opencontainers.image.version="${CMATRIX_VERSION}"
+    org.opencontainers.image.version="${CMATRIX_VERSION}" \
+    version="${CMATRIX_VERSION}"
+
 
