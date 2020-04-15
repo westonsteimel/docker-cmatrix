@@ -7,6 +7,7 @@ ENV CMATRIX_VERSION "${CMATRIX_VERSION}"
 
 RUN apk upgrade && apk add --no-cache \
     ncurses-dev \
+    ncurses-terminfo \
     git \
     build-base \
     autoconf \
